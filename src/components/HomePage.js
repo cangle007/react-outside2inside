@@ -7,6 +7,7 @@ export default function HomePage({
   location,
   users,
   images,
+  logoImages,
   index,
   translateValue,
   autoplay,
@@ -24,6 +25,7 @@ export default function HomePage({
         location={location}
         users={users}
         images={images}
+        logoImages={logoImages}
         index={index}
         translateValue={translateValue}
         autoplay={autoplay}

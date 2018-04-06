@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import headerlogo2 from '../images/headerlogo2.png';
 import ReactPlayer from 'react-player';
-import videoTest from '../images/cinema2.webm';
+import uglyProduce from '../dist/img/uglyProduce.webm';
+import InViewMonitor from 'react-inview-monitor';
 
 import {
   Button,
@@ -20,11 +21,15 @@ export default class HomeComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { index: 0, translateValue: 0 };
+    this.state = {
+      index: 0,
+      indexLogos: 0,
+      translateValue: 0,
+      translateValueLogos: 0
+    };
   }
 
   goToPreviousSlide = () => {
-    //const { index, translateValue, set_index, set_translateValue } = this.props;
     const { index, translateValue } = this.state;
     if (index === 0) return;
 
@@ -32,67 +37,131 @@ export default class HomeComponent extends Component {
       translateValue: translateValue + this.slideWidth(),
       index: index - 1
     });
-    //set_translateValue(translateValue + this.slideWidth());
-    //set_index(index - 1);
   };
 
   goToNextSlide = () => {
-    // const {
-    //   images,
-    //   index,
-    //   translateValue,
-    //   set_index,
-    //   set_translateValue
-    // } = this.props;
     const { images } = this.props;
     const { index, translateValue } = this.state;
 
     if (index === images.length - 1) {
       return this.setState({ translateValue: 0, index: 0 });
-      //set_translateValue(0);
-      //return set_index(0);
     }
 
     this.setState({
       translateValue: translateValue - this.slideWidth(),
       index: index + 1
     });
-    // set_translateValue(translateValue - this.slideWidth());
-    // set_index(index + 1);
+  };
+
+  goToNextSliderLogos = () => {
+    const { indexLogos, translateValueLogos } = this.state;
+
+    if (indexLogos === 3) {
+      return this.setState({ indexLogos: 0, translateValueLogos: 0 });
+    }
+
+    this.setState({
+      translateValueLogos: translateValueLogos - this.slideWidthLogos(),
+      indexLogos: indexLogos + 1
+    });
   };
 
   slideWidth = () => document.querySelector('.slide').clientWidth;
+  slideWidthLogos = () => document.querySelector('.logosSlide').clientWidth;
 
-  // componentDidMount = () => {
-  //   window.setInterval(() => {
-  //     this.goToNextSlide();
-  //   }, 3000);
-  // };
+  componentDidMount = () => {
+    window.setInterval(() => {
+      this.goToNextSlide();
+    }, 3000);
+
+    window.setInterval(() => {
+      this.goToNextSliderLogos();
+    }, 2000);
+  };
   render() {
-    //const { translateValue, coolButtons } = this.props;
-    const { fixed, translateValue } = this.state;
-
+    const { fixed, translateValue, translateValueLogos } = this.state;
+    // className="parallax"
+    console.log('my props---------', this.props);
+    console.log('my state---------', this.state);
     return (
       <div>
         <section className="hero is-primary header-image">
-          <div className="hero-body">
+          <div className="header-body">
             <Menu inverted secondary size="large">
               <Container>
-                <Menu.Item as="a" active>
+                {/* <div className="basicBox">
                   Home
-                </Menu.Item>
+                  <svg
+                    width="100"
+                    height="40"
+                    viewBox="0 0 100 40"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="0" fill="none" width="100" height="40" />
+                  </svg>
+                </div>
+                <div className="basicBox">
+                  Work
+                  <svg
+                    width="100"
+                    height="40"
+                    viewBox="0 0 100 40"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="0" fill="none" width="100" height="40" />
+                  </svg>
+                </div>
+                <div className="basicBox">
+                  About Us
+                  <svg
+                    width="100"
+                    height="40"
+                    viewBox="0 0 100 40"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="0" fill="none" width="100" height="40" />
+                  </svg>
+                </div> */}
+
+                <div className="svg-wrapper">
+                  <svg
+                    height="40"
+                    width="150"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" height="40" width="150" />
+                  </svg>
+                  <div className="words">
+                    <p>HOME</p>
+                  </div>
+                </div>
+                <div className="svg-wrapper">
+                  <svg
+                    height="40"
+                    width="150"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" height="40" width="150" />
+                  </svg>
+                  <div className="words">
+                    <p>WORK</p>
+                  </div>
+                </div>
+
+                <div className="svg-wrapper">
+                  <svg
+                    height="40"
+                    width="150"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect id="shape" height="40" width="150" />
+                  </svg>
+                  <div className="words">
+                    <p>ABOUT US</p>
+                  </div>
+                </div>
+
+                {/* <Menu.Item as="a">Home</Menu.Item>
                 <Menu.Item as="a">Work</Menu.Item>
                 <Menu.Item as="a">Company</Menu.Item>
-                <Menu.Item as="a">Careers</Menu.Item>
-                <Menu.Item position="right">
-                  <Button as="a" inverted>
-                    Log in
-                  </Button>
-                  <Button
-                    as="a"
-                    inverted={!fixed}
-                    primary={fixed}
-                    style={{ marginLeft: '0.5em' }}>
+                <Menu.Item as="a">Careers</Menu.Item> */}
+                <Menu.Item style={{ marginLeft: '23.0em' }}>
+                  <Button>Log in</Button>
+                  <Button as="a" style={{ marginLeft: '0.5em' }}>
                     Sign Up
                   </Button>
                 </Menu.Item>
@@ -101,100 +170,95 @@ export default class HomeComponent extends Component {
 
             <Container text>
               <Header
-                as="h1"
-                content="Imagine-a-Company"
-                inverted
+                content="Outside2Inside"
                 style={{
-                  fontSize: '4em',
-                  fontWeight: 'normal',
-                  marginBottom: 0,
-                  marginTop: '3em'
+                  fontSize: '6em',
+                  fontWeight: 'bold',
+                  //marginBottom: 0,
+                  marginTop: '1.3em',
+                  marginLeft: '1.0em',
+                  color: 'green'
                 }}
               />
+
               <Header
-                as="h2"
-                content="Do whatever you want when you want to."
-                inverted
+                content="Prevent, Recover and Recycle"
                 style={{
-                  fontSize: '1.7em',
-                  fontWeight: 'normal',
-                  marginTop: '1.5em'
+                  fontSize: '2.5em',
+                  fontWeight: 'bold',
+                  //marginBottom: 0,
+                  //marginTop: '1.3em',
+                  marginLeft: '4.2em',
+                  color: 'green'
                 }}
               />
-              <Button primary size="huge">
-                Get Started
-                <Icon name="right arrow" />
-              </Button>
+              {/* <Header
+                content="Prevent, Recover and Recycle"
+                style={{
+                  fontSize: '3em',
+                  fontWeight: 'normal',
+                  marginTop: '0.0em',
+                  marginLeft: '.3em',
+                  color: 'green'
+                }}
+              /> */}
+              <div
+                className="actions"
+                style={{
+                  marginTop: '2.0em'
+                }}>
+                <ul className="button-list">
+                  <li>
+                    <a href="/" className="donate-button">
+                      Donate
+                    </a>
+                  </li>
 
-              <Button primary size="huge">
-                Get Started
-                <Icon name="right arrow" />
-              </Button>
-              <Button primary size="huge">
-                Get Started
-                <Icon name="right arrow" />
-              </Button>
+                  <li>
+                    <a href="/" className="volunteer-button">
+                      Volunteer Today
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </Container>
-
-            {/* <Image src={headerlogo2} width="auto" height="700px" /> */}
           </div>
         </section>
 
-        {/* <section className="hero is-primary header-image">
-          <div className="hero-body">
-            <div className="container has-text-centered">
-              <h1 className="title is-2">
-                Build a feedback-driven product with Roadmap
-              </h1>
-              <h2 className="subtitle is-4">
-                Tell the story of your users feedback
-              </h2>
-              <p>
-                <ReactPlayer
-                  width="100%"
-                  height="100%"
-                  url={videoTest}
-                  playing
-                />
-              </p>
-              <p>
-                <br />
-                <a
-                  href="https://app.roadmap.space/#/signup"
-                  className="button is-primary is-large">
-                  Create your roadmap for free
-                </a>
+        <div className="funding-info-section side-by-side">
+          <div className="side">
+            <div className="inner funding-info">
+              <h2 className="label">With your help</h2>
+              <p className="p10">
+                We’ve recovered
+                <span className="stat stat-short">155,000</span>produce, and fed
+                <span className="stat stat-short">5 thousand</span> people
+                around the nation
               </p>
             </div>
           </div>
-        </section> */}
+        </div>
 
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
               <Grid.Column width={8}>
                 <Header as="h3" style={{ fontSize: '2em' }}>
-                  We Help Companies and Companions
+                  We Prevent, Recover, and Recycle Food
                 </Header>
                 <p style={{ fontSize: '1.33em' }}>
-                  We can give your company superpowers to do things that they
-                  never thought possible. Let us delight your customers and
-                  empower your needs... through pure data analytics.
-                </p>
-                <Header as="h3" style={{ fontSize: '2em' }}>
-                  We Make Bananas That Can Dance
-                </Header>
-                <p style={{ fontSize: '1.33em' }}>
-                  Yes that's right, you thought it was the stuff of dreams, but
-                  even bananas can be bioengineered.
+                  Since 2010 we have recovered 150,000 lbs of produce and feed
+                  over 5,000 people
                 </p>
               </Grid.Column>
-              <Grid.Column floated="right" width={6}>
-                <Image
-                  bordered
-                  rounded
-                  size="large"
-                  src="/assets/images/wireframe/white-image.png"
+              <Grid.Column floated="right" width={7}>
+                <ReactPlayer
+                  // muted="true"
+                  loop="true"
+                  width="100%"
+                  height="100%"
+                  url={uglyProduce}
+                  playing
                 />
               </Grid.Column>
             </Grid.Row>
@@ -206,8 +270,15 @@ export default class HomeComponent extends Component {
           </Grid>
         </Segment>
 
+        <InViewMonitor
+          classNameNotInView="vis-hidden"
+          classNameInView="animated fadeInUp">
+          <p>HERELLLOOOO</p>
+        </InViewMonitor>
+
         <Segment style={{ padding: '0em' }} vertical>
-          <Grid celled="internally" columns="equal" stackable>
+          <Grid columns="equal" stackable>
+            {/* celled="internally" */}
             <Grid.Row textAlign="center">
               <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
                 <Icon name="zoom" size="huge" />
@@ -269,7 +340,7 @@ export default class HomeComponent extends Component {
               className="header"
               horizontal
               style={{ margin: '3em 0em', textTransform: 'uppercase' }}>
-              <a href="#">Case Studies</a>
+              <a href="/">Case Studies</a>
             </Divider>
             <Header as="h3" style={{ fontSize: '2em' }}>
               Did We Tell You About Our Bananas?
@@ -285,6 +356,41 @@ export default class HomeComponent extends Component {
             </Button>
           </Container>
         </Segment>
+
+        <div className="w-blog-list">
+          <div className="w-blog-entry">
+            <div className="w-blog-entry-h">
+              <a className="w-blog-entry-link" href="/">
+                <span className="w-blog-entry-preview">
+                  <img
+                    src="http://www.milkbardigital.com.au/wp-content/uploads/2018/02/shutterstock_547980544-600x600.jpg"
+                    alt="Communicating to Millennials, fam."
+                  />
+                </span>
+                <h2 className="w-blog-entry-title">
+                  <span>Communicating to Millennials, fam.</span>
+                </h2>
+              </a>
+
+              <div className="w-blog-entry-body">
+                <div className="w-blog-meta">
+                  <div className="w-blog-meta-date">
+                    <span className="w-blog-meta-date-month">Feb</span>
+                    <span className="w-blog-meta-date-day">01</span>
+                    <span className="w-blog-meta-date-year">2018</span>
+                  </div>
+                </div>
+                <div className="w-blog-entry-short">
+                  <p className="blog-p">
+                    Millennials and their culture, or as their preceding
+                    generations would argue – a lack thereof, has grown a
+                    special lingua franca of…
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <section style={{ padding: '8em 0em' }} className="slider">
           <div
@@ -323,6 +429,36 @@ export default class HomeComponent extends Component {
             />
           </div>
         </section>
+
+        <div className="parallax">
+          <h2 style={{ color: 'white', paddingTop: 35 }}>
+            PARTNERS WE LOVE WORKING WITH
+          </h2>
+
+          <section className="logos-slider">
+            <div
+              style={{
+                transform: `translateX(${translateValueLogos}px)`,
+                transition: 'transform ease-out 0.45s'
+              }}>
+              {this.props.logoImages.map((images, i) => {
+                return (
+                  <img
+                    alt="arrayOfLogoImages"
+                    key={i}
+                    className="logosSlide"
+                    src={require(`../dist/img/${images}.png`)}
+                    style={{
+                      height: 150,
+                      width: 200,
+                      margin: 40
+                    }}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        </div>
 
         <Segment inverted vertical style={{ padding: '5em 0em' }}>
           <Container>
