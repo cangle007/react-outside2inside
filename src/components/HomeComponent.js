@@ -3,12 +3,14 @@ import headerlogo2 from '../images/headerlogo2.png';
 import ReactPlayer from 'react-player';
 import uglyProduce from '../dist/img/uglyProduce.webm';
 import InViewMonitor from 'react-inview-monitor';
+import matthew from '../dist/img/matthew.png';
 
 import {
   Button,
   Container,
   Divider,
   Grid,
+  Card,
   Header,
   Icon,
   Image,
@@ -79,13 +81,12 @@ export default class HomeComponent extends Component {
     }, 2000);
   };
   render() {
-    const { fixed, translateValue, translateValueLogos } = this.state;
-    // className="parallax"
+    const { translateValue, translateValueLogos } = this.state;
     console.log('my props---------', this.props);
     console.log('my state---------', this.state);
     return (
       <div>
-        <section className="hero is-primary header-image">
+        <section className="header-image">
           <div className="header-body">
             <Menu inverted secondary size="large">
               <Container>
@@ -207,81 +208,90 @@ export default class HomeComponent extends Component {
                 style={{
                   marginTop: '2.0em'
                 }}>
-                <ul className="button-list">
-                  <li>
-                    <a href="/" className="donate-button">
-                      Donate
-                    </a>
-                  </li>
+                <InViewMonitor
+                  classNameNotInView="vis-hidden"
+                  classNameInView="animated fadeInUp">
+                  <ul className=" button-list">
+                    <li>
+                      <a href="/" className="donate-button">
+                        Donate
+                      </a>
+                    </li>
 
-                  <li>
-                    <a href="/" className="volunteer-button">
-                      Volunteer Today
-                    </a>
-                  </li>
-                </ul>
+                    <li>
+                      <a href="/" className="volunteer-button">
+                        Volunteer Today
+                      </a>
+                    </li>
+                  </ul>
+                </InViewMonitor>
               </div>
             </Container>
           </div>
         </section>
 
-        <div className="funding-info-section side-by-side">
-          <div className="side">
-            <div className="inner funding-info">
-              <h2 className="label">With your help</h2>
-              <p className="p10">
-                We’ve recovered
-                <span className="stat stat-short">155,000</span>produce, and fed
-                <span className="stat stat-short">5 thousand</span> people
-                around the nation
-              </p>
-            </div>
-          </div>
+        <div className="parallax-01">
+          <h2 className="label-section-01">With your help</h2>
+          <p className="content-section-01">
+            We’ve recovered
+            <span className="stat stat-short">155,000</span>produce, and fed
+            <span className="stat stat-short">5 thousand</span> people around
+            the nation
+          </p>
         </div>
 
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
               <Grid.Column width={8}>
-                <Header as="h3" style={{ fontSize: '2em' }}>
+                <Header as="h3" style={{ fontSize: '2.1em' }}>
                   We Prevent, Recover, and Recycle Food
                 </Header>
-                <p style={{ fontSize: '1.33em' }}>
-                  Since 2010 we have recovered 150,000 lbs of produce and feed
-                  over 5,000 people
+                <p style={{ fontSize: '1.30em' }}>
+                  Outside2Inside was founded in 2010, in response to the
+                  question:
+                </p>
+                <p
+                  style={{
+                    fontSize: '1.33em',
+                    fontWeight: 'Bold',
+                    fontStyle: 'italic'
+                  }}>
+                  “How can we reduce food waste and redistribute excessive
+                  produces to those who need it?”
+                </p>
+                <p style={{ fontSize: '1.30em' }}>
+                  This idea captivated professions from all fields to come
+                  together to collaborate and explore new ways of using
+                  technologies, shaping social policies, and using educational
+                  platform to turn a simple idea into reality that could feed
+                  6.3 million of U.S. households
                 </p>
               </Grid.Column>
               <Grid.Column floated="right" width={7}>
-                <ReactPlayer
-                  // muted="true"
-                  loop="true"
-                  width="100%"
-                  height="100%"
-                  url={uglyProduce}
-                  playing
-                />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column textAlign="center">
-                <Button size="huge">Check Them Out</Button>
+                <InViewMonitor
+                  childPropsInView={{ playing: true }}
+                  toggleChildPropsOnInView={true}
+                  intoViewMargin="-100px">
+                  <ReactPlayer
+                    loop="true"
+                    onStart
+                    width="100%"
+                    height="100%"
+                    url={uglyProduce}
+                  />
+                </InViewMonitor>
               </Grid.Column>
             </Grid.Row>
           </Grid>
         </Segment>
-
-        <InViewMonitor
-          classNameNotInView="vis-hidden"
-          classNameInView="animated fadeInUp">
-          <p>HERELLLOOOO</p>
-        </InViewMonitor>
 
         <Segment style={{ padding: '0em' }} vertical>
           <Grid columns="equal" stackable>
             {/* celled="internally" */}
             <Grid.Row textAlign="center">
               <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-                <Icon name="zoom" size="huge" />
+                <Icon name="zoom" size="huge" style={{ color: '#f9cab7' }} />
                 <Header as="h3" style={{ fontSize: '2em' }}>
                   The Issue
                 </Header>
@@ -292,21 +302,24 @@ export default class HomeComponent extends Component {
                 </p>
               </Grid.Column>
               <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-                <Icon name="unhide" size="huge" />
+                <Icon name="unhide" size="huge" style={{ color: '#f9cab7' }} />
                 <Header
                   as="h3"
                   style={{ fontSize: '2em', textAlign: 'center' }}>
                   Our Vision
                 </Header>
                 <p style={{ fontSize: '1.33em' }}>
-                  To mobilize the community, non-profit organizations, and
-                  businesses to reduce food waste by 10% through educational
-                  programs, collaboration, and food waste recycling program by
-                  year 2020
+                  To reduce food waste by 10% through educational platforms,
+                  social policies, technologies and food waste recycling program
+                  by year 2020
                 </p>
               </Grid.Column>
               <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-                <Icon name="lightbulb" size="huge" />
+                <Icon
+                  name="lightbulb"
+                  size="huge"
+                  style={{ color: '#f9cab7' }}
+                />
                 <Header
                   as="h3"
                   style={{ fontSize: '2em', textAlign: 'center' }}>
@@ -357,42 +370,94 @@ export default class HomeComponent extends Component {
           </Container>
         </Segment>
 
-        <div className="w-blog-list">
-          <div className="w-blog-entry">
-            <div className="w-blog-entry-h">
-              <a className="w-blog-entry-link" href="/">
-                <span className="w-blog-entry-preview">
-                  <img
-                    src="http://www.milkbardigital.com.au/wp-content/uploads/2018/02/shutterstock_547980544-600x600.jpg"
-                    alt="Communicating to Millennials, fam."
-                  />
-                </span>
-                <h2 className="w-blog-entry-title">
-                  <span>Communicating to Millennials, fam.</span>
-                </h2>
-              </a>
-
-              <div className="w-blog-entry-body">
-                <div className="w-blog-meta">
-                  <div className="w-blog-meta-date">
-                    <span className="w-blog-meta-date-month">Feb</span>
-                    <span className="w-blog-meta-date-day">01</span>
-                    <span className="w-blog-meta-date-year">2018</span>
-                  </div>
-                </div>
-                <div className="w-blog-entry-short">
-                  <p className="blog-p">
-                    Millennials and their culture, or as their preceding
-                    generations would argue – a lack thereof, has grown a
-                    special lingua franca of…
-                  </p>
-                </div>
-              </div>
+        <div className="parallax-02">
+          <h2
+            style={{
+              color: 'white',
+              paddingTop: 60,
+              paddingLeft: 300,
+              fontSize: '30px',
+              fontFamily: 'Gotham-Bold'
+            }}>
+            <div
+              style={{
+                height: 20,
+                width: 800,
+                margin: 10
+              }}>
+              SINCE 2010 OUR PROGRAMS HAVE REACHED MORE THAN 5,000 KIDS AND
+              ADULTS
             </div>
-          </div>
+          </h2>
         </div>
 
-        <section style={{ padding: '8em 0em' }} className="slider">
+        <h2 className="label-section-03">Our Programs</h2>
+        <Grid columns={4} style={{ padding: '4em 0em' }}>
+          <Grid.Row>
+            <Grid.Column className="hover-grow">
+              <InViewMonitor
+                classNameNotInView="vis-hidden"
+                classNameInView="animated jackInTheBox">
+                <Card>
+                  <Image src={matthew} />
+                  <Card.Content>
+                    <Card.Header>Self Awareness Courses</Card.Header>
+                    <Card.Description>
+                      brief details about program
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              </InViewMonitor>
+            </Grid.Column>
+            <Grid.Column className="hover-grow">
+              <InViewMonitor
+                classNameNotInView="vis-hidden"
+                classNameInView="animated jackInTheBox">
+                <Card>
+                  <Image src={matthew} />
+                  <Card.Content>
+                    <Card.Header>Farms2School</Card.Header>
+                    <Card.Description>
+                      brief details about program
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              </InViewMonitor>
+            </Grid.Column>
+            <Grid.Column className="hover-grow">
+              <InViewMonitor
+                classNameNotInView="vis-hidden"
+                classNameInView="animated jackInTheBox">
+                <Card>
+                  <Image src={matthew} />
+                  <Card.Content>
+                    <Card.Header>Kids Food Waste Awareness</Card.Header>
+                    <Card.Description>
+                      brief details about program
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              </InViewMonitor>
+            </Grid.Column>
+            <Grid.Column className="hover-grow">
+              <InViewMonitor
+                classNameNotInView="vis-hidden"
+                classNameInView="animated jackInTheBox">
+                <Card>
+                  <Image src={matthew} />
+                  <Card.Content>
+                    <Card.Header>Composing Community</Card.Header>
+                    <Card.Description>
+                      brief details about program
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              </InViewMonitor>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+
+        <section style={{ padding: '10em 0em' }} className="slider">
           <div
             className="slider-wrapper"
             style={{
@@ -430,11 +495,16 @@ export default class HomeComponent extends Component {
           </div>
         </section>
 
-        <div className="parallax">
-          <h2 style={{ color: 'white', paddingTop: 35 }}>
+        <div className="parallax-03">
+          <h2
+            style={{
+              color: 'white',
+              paddingTop: 35,
+              fontSize: 30,
+              fontFamily: 'Gotham-Bold'
+            }}>
             PARTNERS WE LOVE WORKING WITH
           </h2>
-
           <section className="logos-slider">
             <div
               style={{
